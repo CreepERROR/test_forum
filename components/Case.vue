@@ -1,0 +1,38 @@
+<script lang="ts">
+import { ref } from 'vue'
+export default {
+  props: {
+    // Définition de la prop 'data'
+    data: {
+      type: Object, // Spécifiez le type si nécessaire
+      required: true // Si 'data' est obligatoire ou non
+    }
+  },
+  data() {
+    return {
+      donnees: []
+    }
+  },
+  mounted() {
+    this.donnees=this.data;
+    console.log(this.donnees)
+  }
+}
+</script>
+
+<template>
+  <div class="pack">
+    <NuxtLink :to="`/forum/${donnees.ID}`">{{donnees.Titre}}</NuxtLink>
+    <p>{{donnees.Description}}</p>
+  </div>
+</template>
+
+<style scoped>
+.pack {
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  padding: 5px;
+  margin: 5px;
+}
+</style>
