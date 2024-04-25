@@ -7,8 +7,11 @@ export default {
   },
   async mounted() {
     try {
-      const res = await $fetch('/api/forum', {
-        method: 'get'
+      const res = await $fetch('/api/forumFull', {
+        method: 'post',
+        body:{
+          page:1
+        }
       });
       this.forum = res.response.forums;
       console.log(this.forum)

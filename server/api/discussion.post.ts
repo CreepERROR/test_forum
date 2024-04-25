@@ -5,7 +5,7 @@ export default defineWrappedResponseHandler(async (event) => {
     const db = event.context.mysql
     const body = await readBody(event);
     const id=body.id;
-    const [rows, fields] = await db.execute("SELECT * FROM Forum WHERE ID = (?)",[id])
+    const [rows, fields] = await db.execute("SELECT * FROM Discussion WHERE ID = (?)",[id])
     let status;
     if(rows<1){
         status=false;
