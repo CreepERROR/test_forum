@@ -26,6 +26,6 @@ export default defineWrappedResponseHandler(async (event) => {
     return {
         status:status,
         pageMax:pageMax,
-        discussion: rows
+        reponse: nouvelle
     }
 });

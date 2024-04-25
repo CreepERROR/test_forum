@@ -17,7 +17,7 @@ export default {
         }
       });
       this.discussion = res.response.discussion;
-      console.log(this.forum)
+      console.log(this.discussion)
     } catch (error) {
       alert(error.message)
     }
