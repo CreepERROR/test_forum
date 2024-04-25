@@ -10,13 +10,17 @@ export default defineWrappedResponseHandler(async (event) => {
     await db.execute("INSERT INTO User (Name, Password, Admin) VALUES (?, ?, ?)", [name, pass,admin]);
     const [rows, fields] = await db.execute("SELECT * FROM User WHERE Name=(?)", [name]);
     let status;
+    let message;
     if(rows>0){
         status=false;
+        message="Nom déjà présent";
     }else{
         status=true;
+        message="Création réussi";
     }
     return {
         status: status,
+        message: message,
         user: rows[0]
     }
 });

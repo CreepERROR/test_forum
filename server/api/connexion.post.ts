@@ -8,13 +8,17 @@ export default defineWrappedResponseHandler(async (event) => {
     const db = event.context.mysql
     const [rows, fields] = await db.execute("SELECT * FROM User WHERE Name=(?) AND Password=(?)", [name, pass]);
     let status;
+    let message="";
     if(rows.length==1){
         status=true;
+        message="conexion réussi";
     }else{
         status=false;
+        message="conexion échouer";
     }
     return {
         status: status,
+        message:message,
         user: rows[0]
     }
 });
