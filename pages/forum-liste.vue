@@ -14,7 +14,6 @@ export default {
         }
       });
       this.forum = res.response.forums;
-      console.log(this.forum)
     } catch (error) {
       alert(error.message)
     }
@@ -23,7 +22,7 @@ export default {
 </script>
 
 <template>
-  <h1> Je suis le Forum</h1>
+  <div><h1> Je suis le Forum</h1></div>
   <div v-for="item in forum">
     <Case :data=item></Case>
   </div>

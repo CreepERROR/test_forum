@@ -5,11 +5,11 @@ export default defineWrappedResponseHandler(async (event) => {
     const db = event.context.mysql
     const body = await readBody(event);
     const user=body.user;
-    const forum=body.forum;
-    const title=body.title;
-    const desc=body.desc;
+    const discussion=body.discussion;
+    const contenu=body.contenu;
     const date =new Date();
-    await db.execute("INSERT INTO Discussion (User, Forum, Titre, Description, Date) VALUES (?, ?, ?, ?, ?)", [user, forum, title, desc, date]);
+    await db.execute("INSERT INTO Reponse (User, Discussion, Contenu, Date) VALUES (?, ?, ?, ?)", [user, discussion, contenu, date]);
+    await db.execute("UPDATE Discussion SET Date = (?) WHERE ID=(?)", [date,discussion]);
     return {
         status:true
     }

@@ -16,7 +16,6 @@ export default {
   },
   async mounted() {
     this.donnees=this.data;
-    console.log(this.donnees)
     let id=this.donnees.User;
     try {
       const res = await $fetch('/api/user', {

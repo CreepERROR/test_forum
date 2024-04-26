@@ -15,7 +15,6 @@ export default {
   },
   mounted() {
     this.donnees=this.data;
-    console.log(this.donnees)
   }
 }
 </script>
