@@ -3,7 +3,7 @@
     <header class="head">
       <NuxtLink to="/" class="button">Accueil </NuxtLink>
       <NuxtLink to="/forum-liste" class="button">Forum </NuxtLink>
-      <NuxtLink to="/" class="button" v-if="connected">Profil </NuxtLink>
+      <NuxtLink to="/Profil" class="button" v-if="connected">Profil </NuxtLink>
       <NuxtLink to="Connexion" class="button" v-if="!connected">Connexion </NuxtLink>
       <NuxtLink to="Inscription" class="button" v-if="!connected">Inscription</NuxtLink>
       <NuxtLink to="/" class="button" v-if="connected">Deconnexion </NuxtLink>
@@ -26,6 +26,8 @@ data() {
   mounted() {
   this.connected=true;
   this.user=1;
+  sessionStorage.setItem('user',null);
+
   },
   methods: {
     swap() {
