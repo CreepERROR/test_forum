@@ -6,7 +6,7 @@ export default defineWrappedResponseHandler(async (event) => {
     const body = await readBody(event);
     const id=body.id;
     let page=body.page;
-    const [rows, fields] = await db.execute("SELECT * FROM Reponse WHERE Discussion = (?) ORDER BY Date asc ",[id])
+    const [rows, fields] = await db.execute("SELECT * FROM Reponse WHERE Discussion = (?) ORDER BY Date ASC ",[id])
     let status;
     let pageMax=Math.ceil(rows.length/20);
     if(page>pageMax){

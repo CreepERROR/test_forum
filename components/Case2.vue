@@ -23,6 +23,7 @@ export default {
   <div class="pack">
     <NuxtLink :to="`/discussion/${donnees.ID}`">{{donnees.Titre}}</NuxtLink>
     <p>{{donnees.Description}}</p>
+    <p>{{donnees.Date}}</p>
   </div>
 </template>
 
@@ -33,5 +34,6 @@ export default {
   background-color: red;
   padding: 5px;
   margin: 5px;
+  font-size:1.2em;
 }
 </style>

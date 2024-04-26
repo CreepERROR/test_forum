@@ -19,7 +19,6 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useSession } from 'vue-auth';
 
 const username = ref('');
 const password = ref('');
@@ -34,7 +33,6 @@ const login = async () => {
       },
       body: JSON.stringify({name: username.value, password: password.value})
     });
-    console.log(response)
     const data = await response.json();
 
     if (data.status=200) {

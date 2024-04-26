@@ -43,8 +43,6 @@ export default {
         });
 
         const data = await response.json();
-        console.log(data.response.message);
-        console.log(data.response.user)
 
         if (data.response.message === "conexion réussi") {
           sessionStorage.setItem('user', JSON.stringify(data.response.user));
