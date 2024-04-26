@@ -25,7 +25,6 @@ const password = ref('');
 
 const login = async () => {
   try {
-    // Envoyer la requête de connexion à l'API
     const response = await fetch('/api/inscription', {
       method: 'POST',
       headers: {
@@ -38,7 +37,6 @@ const login = async () => {
     if (data.status=200) {
       navigateTo('/');
     } else {
-      // Afficher un message d'erreur si la connexion a échoué
       console.error('Erreur lors de la connexion:', data.message);
     }
   } catch (error) {

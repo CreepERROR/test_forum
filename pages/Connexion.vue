@@ -65,5 +65,4 @@ export default {
 </script>
 
 <style>
-/* votre style ici */
 </style>
