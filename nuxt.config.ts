@@ -2,4 +2,9 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["nuxt-server-utils"],
+  nitro:{
+    experimental: {
+      websocket:true
+    }
+  }
 })

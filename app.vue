@@ -1,48 +1,50 @@
 <template>
   <div>
     <header class="head">
-      <NuxtLink to="/" class="button">Accueil </NuxtLink>
-      <NuxtLink to="/forum-liste" class="button">Forum </NuxtLink>
-      <NuxtLink to="/Profil" class="button" v-if="connected">Profil </NuxtLink>
-      <NuxtLink to="Connexion" class="button" v-if="!connected">Connexion </NuxtLink>
-      <NuxtLink to="Inscription" class="button" v-if="!connected">Inscription</NuxtLink>
-      <NuxtLink to="/" class="button" v-if="connected" @click.native="logout">Deconnexion </NuxtLink>
+      <NuxtLink to="/" class="button" @click="test()">Accueil </NuxtLink>
+      <NuxtLink to="/forum-liste" class="button" @click="test()">Forum </NuxtLink>
+      <NuxtLink to="/Profil" class="button" v-if="connected" @click="test()">Profil </NuxtLink>
+      <NuxtLink to="Connexion" class="button" v-if="!connected" @click="test()">Connexion </NuxtLink>
+      <NuxtLink to="Inscription" class="button" v-if="!connected" @click="test()">Inscription</NuxtLink>
+      <NuxtLink to="/" class="button" v-if="connected" @click="test()">Deconnexion </NuxtLink>
     </header>
-    <button class="button" @click="swap">SWAP</button>
-  </div>
+    <button class="button" @click="swap">Test Socket</button>
     <div>
       <NuxtPage />
     </div>
+  </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      connected: false,
-      user: 0,
-    };
-  },
+  name:'App',
+data() {
+  return {
+    connected: false,
+  };
+},
   mounted() {
-    this.connected = true;
-    this.user = 1;
-    sessionStorage.setItem('user', null);
+  this.connected=false;
+  sessionStorage.setItem('user',null);
+   this.test();
+    this.$router.beforeEach((to, from, next) => {
+      // Appeler la fonction à chaque changement de route
+      this.test();
+      next();
+    });
   },
   methods: {
     swap() {
-      this.connected =!this.connected;
-      if (this.user == 0) {
-        this.user = 1;
-      } else {
-        this.user = 0;
-      }
+      this.$router.push("/socket");
     },
-    logout() {
-      this.connected = false;
-      this.user = 0;
-      sessionStorage.setItem('user', null);
+    test(){
+      if(sessionStorage.getItem('user')!="null"){
+        this.connected=true;
+      }else{
+        this.connected=false;
+      }
     }
-  }
+  },
 }
 </script>
 

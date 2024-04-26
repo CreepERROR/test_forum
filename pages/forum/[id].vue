@@ -42,9 +42,23 @@ export default {
 </script>
 
 <template>
+  <div class="grandTitre">
   <h1>{{this.forum.Titre}}</h1>
   <p>{{this.forum.Description}}</p>
+  </div>
   <div v-for="item in discussion">
     <Case2 :data=item></Case2>
   </div>
 </template>
+
+<style>
+.grandTitre{
+  background-color:orange;
+  font-size:1.5em;
+  text-align: center;
+  align-items: center;
+  vertical-align: center;
+  padding:20px;
+  margin-top:20px;
+}
+</style>

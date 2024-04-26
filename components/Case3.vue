@@ -26,7 +26,7 @@ export default {
       });
       this.nom = res.response.discussion;
     } catch (error) {
-      alert(error.message)
+      //alert(error.message)
     }
   }
 }
