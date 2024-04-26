@@ -77,7 +77,7 @@ export default {
     <select  class="select" v-model="forum" placeholder="Choisir le Forum">
       <option v-for="item in this.forumList" :value="item.ID">{{ item.Titre }}</option>
     </select>
-  <textarea class="contenu" v-model="contenu" placeholder="Titre de la Discussion"/>
+  <textarea class="contenu" v-model="contenu" placeholder="Description de la Discussion"/>
     <input class="titre" type="button" @click="send()" value="Créé la discussion">
   </div>
 </template>

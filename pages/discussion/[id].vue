@@ -3,15 +3,18 @@ export default {
   data() {
     return {
       id: 0,
+      user:null,
       reponse:[],
       writtenMessage:"",
       page:1,
+      pageMax:1,
       title:"",
       desc:"",
       date:null,
     };
   },
   async mounted() {
+    this.user=sessionStorage.getItem('user');
     this.id = this.$route.params.id;
     this.getTitle();
     this.loadMessage();
@@ -25,7 +28,7 @@ export default {
         const res = await $fetch('/api/reponseCreate', {
           method: 'post',
           body:{
-            user:1,
+            user:JSON.parse(this.user).ID,
             discussion:this.id,
             contenu:this.writtenMessage
           }
@@ -46,6 +49,7 @@ export default {
           }
         });
         this.reponse = res.response.reponse;
+        this.pageMax=res.response.pageMax;
       } catch (error) {
         alert(error.message)
       }
@@ -60,7 +64,6 @@ export default {
         });
         this.title=res.response.discussion.Titre;
         this.desc=res.response.discussion.Description;
-        console.log(res.response);
       } catch (error) {
         alert(error.message)
       }
@@ -77,7 +80,7 @@ export default {
   <div v-for="item in reponse">
     <Case3 :data=item></Case3>
   </div>
-  <div class="response">
+  <div class="response" v-if="user!='null'">
     <textarea class="contenu" v-model="writtenMessage" placeholder="Titre de la Discussion"/>
     <input class=textField type="button" value="Envoyer" @click="postMessage">
   </div>

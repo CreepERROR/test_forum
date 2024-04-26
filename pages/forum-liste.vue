@@ -3,10 +3,11 @@ export default {
   data(){
     return {
       forum: [],
-      user:1
+      user:null
     }
   },
   async mounted() {
+    this.user=sessionStorage.getItem("user");
     try {
       const res = await $fetch('/api/forumFull', {
         method: 'post',
@@ -21,7 +22,7 @@ export default {
   },
   methods:{
     goToCreate(){
-      if(this.user!=null){
+      if(this.user!='null'){
         this.$router.push("/forum/create");
       }else{
         this.$router.push("/connexion");
@@ -36,7 +37,7 @@ export default {
   <div v-for="item in forum">
     <Case :data=item></Case>
   </div>
-  <input class="added" type="button" value="créé une nouvelle discussion" @click="goToCreate">
+  <input v-if="user!='null'" class="added" type="button" value="créé une nouvelle discussion" @click="goToCreate">
 </template>
 
 <style>

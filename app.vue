@@ -4,11 +4,14 @@
       <NuxtLink to="/" class="button" @click="test()">Accueil </NuxtLink>
       <NuxtLink to="/forum-liste" class="button" @click="test()">Forum </NuxtLink>
       <NuxtLink to="/Profil" class="button" v-if="connected" @click="test()">Profil </NuxtLink>
-      <NuxtLink to="Connexion" class="button" v-if="!connected" @click="test()">Connexion </NuxtLink>
-      <NuxtLink to="Inscription" class="button" v-if="!connected" @click="test()">Inscription</NuxtLink>
-      <NuxtLink to="/" class="button" v-if="connected" @click="test()">Deconnexion </NuxtLink>
+      <NuxtLink to="/Connexion" class="button" v-if="!connected" @click="test()">Connexion </NuxtLink>
+      <NuxtLink to="/Inscription" class="button" v-if="!connected" @click="test()">Inscription</NuxtLink>
+      <NuxtLink to="/" class="button" v-if="connected" @click.native="logout">Deconnexion </NuxtLink>
     </header>
+    <div class="debug">
     <button class="button" @click="swap">Test Socket</button>
+      <NuxtLink to="/admin" class="button" v-if="connected" @click="test()">Admin </NuxtLink>
+    </div>
     <div>
       <NuxtPage />
     </div>
@@ -43,12 +46,20 @@ data() {
       }else{
         this.connected=false;
       }
+    },
+    logout() {
+      this.connected = false;
+      this.user = 0;
+      sessionStorage.setItem('user', null);
     }
   },
 }
 </script>
 
 <style>
+.debug{
+  display:flex
+}
 .head {
   display: flex;
   justify-content: space-around;

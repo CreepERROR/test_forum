@@ -11,12 +11,18 @@ export default {
   data() {
     return {
       donnees: [],
-      nom: " "
+      nom: " ",
+      admin:null,
+      user:null
     }
   },
   async mounted() {
     this.donnees=this.data;
     let id=this.donnees.User;
+    this.user=JSON.parse(sessionStorage.getItem('user'));
+    if(this.user!=null && this.user!='null'){
+      this.admin=this.user.Admin;
+    }
     try {
       const res = await $fetch('/api/user', {
         method: 'post',
@@ -28,6 +34,22 @@ export default {
     } catch (error) {
       //alert(error.message)
     }
+  },
+  methods:{
+    async deleted(){
+      try {
+        const res = await $fetch('/api/reponseDelete', {
+          method: 'post',
+          body:{
+            id:this.donnees.ID
+          }
+        });
+        this.forum = res.response.forums;
+      } catch (error) {
+        alert(error.message)
+      }
+      this.$router.push("/forum-liste");
+    }
   }
 }
 </script>
@@ -37,6 +59,7 @@ export default {
     <h1>Par : {{nom}}</h1>
     <p>{{donnees.Contenu}}</p>
     <p>Envoyer le : {{donnees.Date}}</p>
+    <input type="button" value="supprimer" v-if="admin!=null" @click="deleted()">
   </div>
 </template>
 

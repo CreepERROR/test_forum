@@ -10,11 +10,33 @@ export default {
   },
   data() {
     return {
-      donnees: []
+      donnees: [],
+      admin:null,
+      user:null
     }
   },
   mounted() {
     this.donnees=this.data;
+    this.user=JSON.parse(sessionStorage.getItem('user'));
+    if(this.user!=null && this.user!='null'){
+      this.admin=this.user.Admin;
+    }
+  },
+  methods:{
+    async deleted(){
+      try {
+        const res = await $fetch('/api/discussionDelete', {
+          method: 'post',
+          body:{
+            id:this.donnees.ID
+          }
+        });
+        this.forum = res.response.forums;
+      } catch (error) {
+        alert(error.message)
+      }
+      this.$router.push("/forum-liste");
+    }
   }
 }
 </script>
@@ -24,6 +46,7 @@ export default {
     <NuxtLink :to="`/discussion/${donnees.ID}`">{{donnees.Titre}}</NuxtLink>
     <p>{{donnees.Description}}</p>
     <p>{{donnees.Date}}</p>
+    <input type="button" value="supprimer" v-if="admin!=null" @click="deleted()">
   </div>
 </template>
 
